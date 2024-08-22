@@ -99,6 +99,28 @@
         public string Name;
     }
 
+    class Bus
+    {
+        public int? Load;
+
+        public Bus(int? load)
+        {
+            Load = load;
+        }
+
+        public void PrintStatus()
+        {
+            if (Load.HasValue && Load > 0)
+            {
+                Console.WriteLine("В авбтобусе {0} пассажиров", Load.Value);
+            }
+            else
+            {
+                Console.WriteLine("В автобусе не пассажиров");
+            }
+        }
+    }
+
     struct Animal
         {
             // Поля структуры
@@ -146,6 +168,9 @@
             animal.Info();
 
             var department = GetCurrentDepartment();
+            
+            Bus bus = new Bus(20);
+            bus.PrintStatus();
 
 
             Console.ReadKey();
