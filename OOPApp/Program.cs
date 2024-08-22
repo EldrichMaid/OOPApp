@@ -30,6 +30,7 @@
             age = a;
         }
     }
+
     class Pen
     {
         public string color;
@@ -81,6 +82,23 @@
        
     }
 
+    class Company
+    {
+        public string Type;
+        public string Name;
+    }
+
+    class Department
+    {
+        public Company Company;
+        public City City;
+    }
+
+    class City
+    {
+        public string Name;
+    }
+
     struct Animal
         {
             // Поля структуры
@@ -94,10 +112,24 @@
                 Console.WriteLine("Это {0} по кличке {1}, ему {2}", type, name, age);
             }
         }
+
     internal class Program
     {
-        
-        
+        static Department GetCurrentDepartment()
+        {
+            Department department = new Department();
+            department.Company = new Company();
+            department.Company.Type = "Банк";
+            department.Company.Name = "Сбербанк";
+            department.City = new City();
+            department.City.Name = "Санкт-Петербург";
+            if (department?.Company?.Type == "Банк" && department?.City?.Name == "Санкт-Петербург")
+            {
+                Console.WriteLine("У банка {0} есть отделение в Санкт-Петербурге", department?.Company?.Name ?? "Неизвестная компания");
+            }
+            return department;
+        }
+
         static void Main(string[] args)
         {
             Human human = new Human();
@@ -112,6 +144,8 @@
 
             Animal animal = new Animal { type = "Собака", name = "Вольт", age = 4 };
             animal.Info();
+
+            var department = GetCurrentDepartment();
 
 
             Console.ReadKey();
