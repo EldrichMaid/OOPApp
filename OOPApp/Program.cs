@@ -34,16 +34,51 @@
     {
         public string color;
         public int cost;
+
         public Pen()
         {
             color = "Черный";
             cost = 100;
         }
+
         public Pen(string penColor, int penCost)
         {
             color = penColor;
             cost = penCost;
         }
+    }
+
+    class Rectangle
+    {
+        public int a;
+        public int b;
+
+        public Rectangle()
+        {
+            a = 6;
+            b = 4;
+        }
+
+        public Rectangle(int equal)
+        {
+            a = equal;
+            b = equal;
+        }
+
+        public Rectangle(int diffone, int difftwo)
+        {
+            a = diffone;
+            b = difftwo;
+        }
+
+        public int Square()
+        {
+            int SquareVal = a * b;
+            Console.WriteLine("Для прямоугольника со сторонами {0} и {1} площадь равняется {2}", a, b,SquareVal);
+            return SquareVal;
+        }
+
+       
     }
 
     struct Animal
