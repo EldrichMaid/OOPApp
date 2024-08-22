@@ -75,6 +75,9 @@
             human = new Human("Иван", 28);
             human.Greetings();
 
+            Animal animal = new Animal { type = "Собака", name = "Вольт", age = 4 };
+            animal.Info();
+
 
             Console.ReadKey();
         }
