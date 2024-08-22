@@ -11,7 +11,25 @@
             {
                 Console.WriteLine("Меня зовут {0}, мне {1}", name, age);
             }
+        // Конструктор 1
+        public Human()
+        {
+            name = "Неизвестно";
+            age = 20;
         }
+        // Конструктор 2
+        public Human(string n)
+        {
+            name = n;
+            age = 20;
+        }
+        // Конструктор 3
+        public Human(string n, int a)
+        {
+            name = n;
+            age = a;
+        }
+    }
     
     struct Animal
         {
@@ -34,8 +52,12 @@
         {
             Human human = new Human();
             human.Greetings();
-            human.name = "Дмитрий";
-            human.age = 23;
+            human.name = "Иван";
+            human.age = 28;
+            human.Greetings();
+            human = new Human("Ivan");
+            human.Greetings();
+            human = new Human("Иван", 28);
             human.Greetings();
 
 
