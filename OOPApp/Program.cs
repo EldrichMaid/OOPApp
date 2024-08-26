@@ -265,7 +265,35 @@
 
     class User
     {
+        private string _login;
+        private string _email;
         private int age;
+
+        public string Login
+        {
+            get { return _login; }
+            set
+            {
+                if (value.Length < 3)
+                {
+                    throw new ArgumentException("Login must be at least 3 symbols long.");
+                }
+                _login = value;
+            }
+        }
+
+        public string Email
+        {
+            get { return _email; }
+            set
+            {
+                if (!value.Contains("@"))
+                {
+                    throw new ArgumentException("Email must contain '@'.");
+                }
+                _email = value;
+            }
+        }
 
         public int Age
         {
@@ -273,12 +301,11 @@
             {
                 return age;
             }
-
             set
             {
                 if (value < 18)
                 {
-                    Console.WriteLine("Возраст должен быть не меньше 18");
+                    Console.WriteLine("Age must be at least 18.");
                 }
                 else
                 {
@@ -286,6 +313,14 @@
                 }
             }
         }
+
+        public User(string login, string email, int age)
+        {
+            Login = login;
+            Email = email;
+            Age = age;
+        }
+
     }
 
     internal class Program
@@ -324,12 +359,16 @@
             
             Bus bus = new Bus(20);
             bus.PrintStatus();
-
-            User user = new User();
-            // Setter
-            user.Age = 23;
-            // Getter
-            Console.WriteLine(user.Age);
+           
+            try
+            {
+                User newuser = new User("user", "user@example.com", 20);
+                Console.WriteLine($"Login: {newuser.Login}, Email: {newuser.Email}, Age: {newuser.Age}");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             Console.ReadKey();
         }
