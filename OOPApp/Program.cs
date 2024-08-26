@@ -263,6 +263,24 @@
         }
     }
 
+    class User
+    {
+        private int age;
+
+        public int Age
+        {
+            get
+            {
+                return age;
+            }
+
+            set
+            {
+                age = value;
+            }
+        }
+    }
+
     internal class Program
     {
         static Department GetCurrentDepartment()
@@ -300,6 +318,11 @@
             Bus bus = new Bus(20);
             bus.PrintStatus();
 
+            User user = new User();
+            // Setter
+            user.Age = 23;
+            // Getter
+            Console.WriteLine(user.Age);
 
             Console.ReadKey();
         }
