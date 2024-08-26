@@ -359,16 +359,32 @@
             
             Bus bus = new Bus(20);
             bus.PrintStatus();
-           
-            try
+
+            User user = null; 
+            while (user == null)
             {
-                User newuser = new User("user", "user@example.com", 20);
-                Console.WriteLine($"Login: {newuser.Login}, Email: {newuser.Email}, Age: {newuser.Age}");
+                try
+                {
+                    Console.Write("Enter Login (at least 3 characters): ");
+                    string login = Console.ReadLine();
+                    Console.Write("Enter Email (must contain '@'): ");
+                    string email = Console.ReadLine();
+                    Console.Write("Enter Age (at least 18): ");
+                    int age = int.Parse(Console.ReadLine());
+                    user = new User(login, email, age);
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Please try again.");
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid age format. Please enter a number.");
+                    Console.WriteLine("Please try again.");
+                }
             }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            Console.WriteLine($"Login: {user.Login}, Email: {user.Email}, Age: {user.Age}");
 
             Console.ReadKey();
         }
