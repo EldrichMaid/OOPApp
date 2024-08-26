@@ -149,12 +149,16 @@
     {
         public double radius;
 
-        public double Square()
+        public double Area()
         {
+            double area = Math.PI * Math.Pow(radius, 2);
+            return area;
         }
 
         public double Length()
         {
+            double circumference = 2 * Math.PI * radius;
+            return circumference;
         }
     }
 
@@ -164,12 +168,17 @@
         public int b;
         public int c;
 
-        public double Square()
+        public double Area()
         {
+            double s = (a + b + c) / 2;
+            double area = Math.Sqrt(s * (s - a) * (s - b) * (s - c));
+            return area;
         }
 
         public double Perimeter()
         {
+            double per = (a + b + c);
+            return per;
         }
     }
 
@@ -177,12 +186,16 @@
     {
         public int side;
 
-        public double Square()
+        public double Area()
         {
+            double area = Math.Pow(side, 2);
+            return area;
         }
 
         public double Perimeter()
         {
+            int per = side * 4;
+            return per;
         }
     }
 
