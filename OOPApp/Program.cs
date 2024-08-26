@@ -247,6 +247,22 @@
             }
         }
 
+    class TrafficLight
+    {
+        private string color;
+
+        private void ChangeColor(string newcolor)
+        {
+            if (color != newcolor)
+                color = newcolor;
+        }
+
+        public string GetColor()
+        {
+            return color;
+        }
+    }
+
     internal class Program
     {
         static Department GetCurrentDepartment()
