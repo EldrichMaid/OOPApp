@@ -116,7 +116,7 @@
             }
             else
             {
-                Console.WriteLine("В автобусе не пассажиров");
+                Console.WriteLine("В автобусе нет пассажиров");
             }
         }
     }
