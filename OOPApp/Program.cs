@@ -389,6 +389,26 @@
         }
     }
 
+    class ObjectData
+    {
+        private string name;
+        private string owner;
+        private int length;
+        private int count;
+
+        public ObjectData(string name, string ownerName, int objLength, int count)
+        {
+            this.name = name;
+            owner = ownerName;
+            length = objLength;
+            this.count = count;
+        }
+        public void DisplayData()
+        {
+            Console.WriteLine($"The data states that {name} owned by {owner} with length of {length} has the count of {count}");
+        }
+    }
+
     internal class Program
     {
         static Department GetCurrentDepartment()
@@ -456,6 +476,16 @@
             car.Move();
 
             var obj = new Obj("Объект", "Нет описания");
+            Console.WriteLine("Enter name:");
+            string name = Console.ReadLine();
+            Console.WriteLine("Enter name of the owner:");
+            string owner = Console.ReadLine();
+            Console.WriteLine("Enter objects length:");
+            int length = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter objects count:");
+            int count = int.Parse(Console.ReadLine());
+            var ObjectData = new ObjectData(name, owner, length, count);
+            ObjectData.DisplayData();
 
             Console.ReadKey();
         }
