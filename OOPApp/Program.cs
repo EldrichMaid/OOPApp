@@ -141,7 +141,7 @@
             Mileage = 0;
         }
 
-        private void Move()
+        public void Move()
         {
             Mileage++;
             Fuel -= 0.5;
@@ -176,6 +176,22 @@
         public bool IsTurningRight()
         {
             return turn == TurnDirection.Right;
+        }
+    }
+
+    enum FuelType
+    {
+        Gas = 0,
+        Electricity
+    }
+
+    class HybridCar : Car
+    {
+        public FuelType FuelType;
+
+        public void ChangeFuelType(FuelType type)
+        {
+            FuelType = type;
         }
     }
 
@@ -385,6 +401,9 @@
                 }
             }
             Console.WriteLine($"Login: {user.Login}, Email: {user.Email}, Age: {user.Age}");
+
+            Car car = new HybridCar();
+            car.Move();
 
             Console.ReadKey();
         }
