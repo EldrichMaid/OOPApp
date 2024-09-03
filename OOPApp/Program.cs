@@ -372,6 +372,23 @@
 
     class Carrot : Vegetable { }
 
+    class Obj
+    {
+        private string name;
+        private string description;
+
+        public Obj()
+        {
+            Console.WriteLine("Вызван конструктор без параметров");
+        }
+
+        public Obj(string name, string description) : this()
+        {
+            this.name = name;
+            this.description = description;
+        }
+    }
+
     internal class Program
     {
         static Department GetCurrentDepartment()
@@ -437,6 +454,8 @@
 
             Car car = new HybridCar();
             car.Move();
+
+            var obj = new Obj("Объект", "Нет описания");
 
             Console.ReadKey();
         }
