@@ -447,17 +447,23 @@
         {
             Console.WriteLine("Метод класса BaseClass");
         }
+
+        public virtual int Counter
+        {
+            get;
+            set;
+        }
     }
 
     class DerivedClass : BaseClass
     {
-        public string Description;
-        public int Counter;
+        public string Description;        
 
         public DerivedClass(string name, string description): base(name) 
         {
             Description = description;
         }
+
         public DerivedClass(string name, string description, int counter) : this(name, description)
         {
             Counter = counter;
@@ -466,6 +472,82 @@
         public override void Display()
         {
             Console.WriteLine("Метод класса DerivedClass");
+        }
+
+        private int counter;
+        public override int Counter
+        {
+            get
+            {
+                return counter;
+            }
+            set
+            {
+                if (value >= 0)
+                {
+                    counter = value;
+                }
+            }
+        }
+    }
+
+    class Citizen
+    {
+        public virtual double Age
+        {
+            get;
+            set;
+        }
+
+        public void SayYourAge()
+        {
+            Console.WriteLine("Мне {0} лет", Age);
+        }
+    }
+
+    class CivilServant : Citizen
+    {
+        private double age;
+        public override double Age
+        {
+            get
+            {
+                return age;
+            }
+            set
+            {
+                if (value < 18)
+                {
+                    Console.WriteLine("Для работы госслужащим гражданин должен быть не младше 18 лет");
+                }
+                else
+                {
+                    age = value;
+                }
+            }
+        }
+    }
+
+    class President : CivilServant
+    {
+        private double age;
+        public override double Age
+        {
+            get
+            {
+                return age;
+            }
+            set
+            {
+                if (value < 35)
+                {
+                    Console.WriteLine("Для работы президентом гражданин должен быть не младше 35 лет");
+                }
+                else
+                {
+                    age = value;
+                }
+            }
         }
     }
 
