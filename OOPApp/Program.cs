@@ -584,6 +584,7 @@
             Console.WriteLine("AA");
         }
     }
+
     class BB : AA
     {
         public new void Display()
@@ -591,6 +592,7 @@
             Console.WriteLine("BB");
         }
     }
+
     class CC : AA
     {
         public override void Display()
@@ -598,6 +600,7 @@
             Console.WriteLine("CC");
         }
     }
+
     class DD : BB
     {
         public new void Display()
@@ -605,11 +608,32 @@
             Console.WriteLine("DD");
         }
     }
+
     class EE : CC
     {
         public new void Display()
         {
             Console.WriteLine("EE");
+        }
+    }
+
+    class ObjOverload
+    {
+        public int Value;
+
+        public static ObjOverload operator +(ObjOverload a, ObjOverload b)
+        {
+            return new ObjOverload
+            {
+                Value = a.Value + b.Value
+            };
+        }
+        public static ObjOverload operator -(ObjOverload a, ObjOverload b)
+        {
+            return new ObjOverload
+            {
+                Value = a.Value - b.Value
+            };
         }
     }
 
