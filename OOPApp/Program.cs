@@ -200,6 +200,7 @@
 
         public override void Move()
         {
+            base.Move();
             Console.WriteLine("Вызван метод Move класса HybridCar");
             Mileage++;
 
