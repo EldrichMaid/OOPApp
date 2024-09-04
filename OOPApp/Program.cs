@@ -637,6 +637,43 @@
         }
     }
 
+    class Book
+    {
+        public string Name;
+        public string Author;
+    }
+
+    class BookCollection
+    {
+        private Book[] collection;
+        public BookCollection(Book[] collection)
+        {
+            this.collection = collection;
+        }
+        public Book this[int index]
+        {
+            get
+            {
+                if (index >= 0 && index < collection.Length)
+                {
+                    return collection[index];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            private set
+            {
+                if (index >= 0 && index < collection.Length)
+                {
+                    collection[index] = value;
+                }
+            }
+        }
+    }
+
     internal class Program
     {
         static Department GetCurrentDepartment()
@@ -735,6 +772,22 @@
             c.Display();    // метод класса C
             ((A)c).Display();   // метод класса B
             ((B)c).Display();	// метод класса B
+
+            var array = new Book[]
+            {
+                new Book
+                {
+                    Name = "Мастер и Маргарита",
+                    Author = "М.А. Булгаков"
+                },
+                new Book
+                {
+                    Name = "Отцы и дети",
+                    Author = "И.С. Тургенев"
+                }
+            };
+            BookCollection collection = new BookCollection(array);
+            Book book = collection[1];
 
             Console.ReadKey();
         }
