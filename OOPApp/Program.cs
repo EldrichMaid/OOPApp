@@ -472,6 +472,7 @@
 
         public override void Display()
         {
+            base.Display();
             Console.WriteLine("Метод класса DerivedClass");
         }
 
@@ -635,6 +636,9 @@
             ExtraCar.Move();         
             hybridCar.Move();       
             ((Car)hybridCar).Move();
+
+            DerivedClass Object = new DerivedClass("name","description");
+            Object.Display();
 
             Console.ReadKey();
         }
