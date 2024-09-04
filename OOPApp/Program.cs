@@ -560,6 +560,7 @@
             Console.WriteLine("Вызван метод класса A");
         }
     }
+
     class B : A
     {
         public override void Display()
@@ -567,11 +568,48 @@
             Console.WriteLine("Вызван метод класса B");
         }
     }
+
     class C : B
     {
         public new void Display()
         {
             Console.WriteLine("Вызван метод класса C");
+        }
+    }
+
+    class AA
+    {
+        public virtual void Display()
+        {
+            Console.WriteLine("AA");
+        }
+    }
+    class BB : AA
+    {
+        public new void Display()
+        {
+            Console.WriteLine("BB");
+        }
+    }
+    class CC : AA
+    {
+        public override void Display()
+        {
+            Console.WriteLine("CC");
+        }
+    }
+    class DD : BB
+    {
+        public new void Display()
+        {
+            Console.WriteLine("DD");
+        }
+    }
+    class EE : CC
+    {
+        public new void Display()
+        {
+            Console.WriteLine("EE");
         }
     }
 
