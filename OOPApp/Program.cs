@@ -131,7 +131,7 @@
     class Car
     {
         private double Fuel;
-        private int Mileage;
+        public int Mileage;
         private string color;
         private TurnDirection turn;
 
@@ -141,8 +141,9 @@
             Mileage = 0;
         }
 
-        public void Move()
+        public virtual void Move()
         {
+            Console.WriteLine("Вызван метод Move класса Car");
             Mileage++;
             Fuel -= 0.5;
         }
@@ -188,6 +189,30 @@
     class HybridCar : Car
     {
         public FuelType FuelType;
+        public double Gas;
+        public double Electricity;
+
+        public HybridCar()
+        {
+            Electricity = 50;
+            Gas = 50;
+        }
+
+        public override void Move()
+        {
+            Console.WriteLine("Вызван метод Move класса HybridCar");
+            Mileage++;
+
+            switch (FuelType)
+            {
+                case FuelType.Gas:
+                    Gas -= 0.5;
+                    break;
+                case FuelType.Electricity:
+                    Electricity -= 0.5;
+                    break;
+            }
+        }
 
         public void ChangeFuelType(FuelType type)
         {
@@ -510,6 +535,12 @@
             int count = int.Parse(Console.ReadLine());
             var ObjectData = new ObjectData(name, owner, length, count);
             ObjectData.DisplayData();
+
+            Car ExtraCar = new Car();
+            HybridCar hybridCar = new HybridCar();
+            ExtraCar.Move();         
+            hybridCar.Move();       
+            ((Car)hybridCar).Move();
 
             Console.ReadKey();
         }
