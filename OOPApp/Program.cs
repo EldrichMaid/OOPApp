@@ -239,7 +239,7 @@
         public double Gas;
         public double Electricity;
         public T GasEngine;
-        public U ElectricEngine;
+        public U ElectricEngine;        
 
         public HybridCar()
         {
@@ -833,6 +833,13 @@
                 return number;
             }
         }
+    }
+
+    class Record<T1, T2>
+    {
+        public T1 Id;
+        public DateTime Date;
+        public T2 Value;
     }
 
 
