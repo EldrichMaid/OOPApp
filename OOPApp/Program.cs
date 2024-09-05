@@ -152,11 +152,13 @@
         }
     }
 
-    class Battery { }
+    class CarPart { }
 
-    class Differential { }
+    class Battery: CarPart { }
 
-    class Wheel { }
+    class Differential : CarPart { }
+
+    class Wheel : CarPart { }
 
     class GasEngine: CarEngine, IEngine
     {
@@ -170,7 +172,7 @@
         }
     }
 
-    class Car <T> where T : CarEngine
+    class Car <TE> where TE : CarEngine
     {
         private double Fuel;
         public int Mileage;
@@ -178,7 +180,8 @@
         private TurnDirection turn;
         public static int MinPrice = 100_000;
         public static int MaxPrice;
-        private T engine;
+        private TE engine;
+        
 
         static Car()
         {
@@ -190,10 +193,10 @@
         {
             Fuel = 50;
             Mileage = 0;
-            engine = (T)Activator.CreateInstance(typeof(T));
+            engine = (TE)Activator.CreateInstance(typeof(TE));
         }
 
-        public virtual void ChangePart<T1>(T1 newPart)
+        public virtual void ChangePart<TP>(TP newPart) where TP : CarPart
         {
 
         }
@@ -244,20 +247,20 @@
         Electricity
     }
 
-    class HybridCar<T, U> : Car<CarEngine> where T : IEngine where U : IEngine
+    class HybridCar<TG, TE> : Car<CarEngine> where TG : IEngine where TE : IEngine
     {
         public FuelType FuelType;
         public double Gas;
         public double Electricity;
-        public T GasEngine;
-        public U ElectricEngine;        
+        public TG GasEngine;
+        public TE ElectricEngine;        
 
         public HybridCar()
         {
             Electricity = 50;
             Gas = 50;
-            GasEngine = (T)Activator.CreateInstance(typeof(T));
-            ElectricEngine = (U)Activator.CreateInstance(typeof(U));
+            GasEngine = (TG)Activator.CreateInstance(typeof(TG));
+            ElectricEngine = (TE)Activator.CreateInstance(typeof(TE));
         }
 
         public override void Move()
