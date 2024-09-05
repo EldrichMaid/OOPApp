@@ -402,6 +402,7 @@
     {
         private string name;
         private string description;
+        public static int MaxValue = 2000;
 
         public Obj()
         {
