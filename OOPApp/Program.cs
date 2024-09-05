@@ -126,9 +126,45 @@
         None = 0,
         Left,
         Right
+    } 
+    
+    abstract class CarEngine 
+    {
+        public abstract void Start();
+        public abstract void Stop();
     }
 
-    class Car
+    interface IEngine
+    {
+        void Start();
+        void Stop();
+    }
+
+    class ElectricEngine:CarEngine, IEngine
+    {
+        public override void Start()
+        {
+            Console.WriteLine("Electric engine started.");
+        }
+        public override void Stop()
+        {
+            Console.WriteLine("Electric engine stopped.");
+        }
+    }
+
+    class GasEngine: CarEngine, IEngine
+    {
+        public override void Start()
+        {
+            Console.WriteLine("Gas engine started.");
+        }
+        public override void Stop()
+        {
+            Console.WriteLine("Gas engine stopped.");
+        }
+    }
+
+    class Car <T> where T : CarEngine
     {
         private double Fuel;
         public int Mileage;
@@ -136,7 +172,7 @@
         private TurnDirection turn;
         public static int MinPrice = 100_000;
         public static int MaxPrice;
-        public int Price;
+        private T engine;
 
         static Car()
         {
@@ -148,6 +184,7 @@
         {
             Fuel = 50;
             Mileage = 0;
+            engine = (T)Activator.CreateInstance(typeof(T));
         }
 
         public virtual void Move()
@@ -155,6 +192,7 @@
             Console.WriteLine("Вызван метод Move класса Car");
             Mileage++;
             Fuel -= 0.5;
+            engine.Start();
         }
 
         private void Turn(TurnDirection direction)
@@ -195,16 +233,20 @@
         Electricity
     }
 
-    class HybridCar : Car
+    class HybridCar<T, U> : Car<CarEngine> where T : IEngine where U : IEngine
     {
         public FuelType FuelType;
         public double Gas;
         public double Electricity;
+        public T GasEngine;
+        public U ElectricEngine;
 
         public HybridCar()
         {
             Electricity = 50;
             Gas = 50;
+            GasEngine = (T)Activator.CreateInstance(typeof(T));
+            ElectricEngine = (U)Activator.CreateInstance(typeof(U));
         }
 
         public override void Move()
@@ -217,9 +259,11 @@
             {
                 case FuelType.Gas:
                     Gas -= 0.5;
+                    GasEngine.Start();
                     break;
                 case FuelType.Electricity:
                     Electricity -= 0.5;
+                    ElectricEngine.Start();
                     break;
             }
         }
@@ -227,6 +271,18 @@
         public void ChangeFuelType(FuelType type)
         {
             FuelType = type;
+        }
+
+        public void StartBothEngines()
+        {
+            GasEngine.Start();
+            ElectricEngine.Start();
+        }
+
+        public void StopBothEngines()
+        {
+            GasEngine.Stop();
+            ElectricEngine.Stop();
         }
     }
 
@@ -842,10 +898,7 @@
                 }
             }
             Console.WriteLine($"Login: {user.Login}, Email: {user.Email}, Age: {user.Age}");
-
-            Car car = new HybridCar();
-            car.Move();
-
+            
             var obj = new Obj("Объект", "Нет описания");
             Console.WriteLine("Enter name:");
             string name = Console.ReadLine();
@@ -857,15 +910,7 @@
             int count = int.Parse(Console.ReadLine());
             var ObjectData = new ObjectData(name, owner, length, count);
             ObjectData.DisplayData();
-
-            Car ExtraCar = new Car();
-            HybridCar hybridCar = new HybridCar();
-            ExtraCar.Move();         
-            hybridCar.Move();       
-            ((Car)hybridCar).Move(); 
-            Console.WriteLine(Car.MinPrice);
-            Console.WriteLine(Car.MaxPrice);
-
+          
             DerivedClass Object = new DerivedClass("name","description");
             Object.Display();
 
@@ -916,6 +961,20 @@
             Console.WriteLine(num4.GetPositive()); //13
             Console.WriteLine(num5.GetNegative()); //0
             Console.WriteLine(num5.GetPositive()); //0
+
+            Car<GasEngine> car = new Car<GasEngine>();
+            car.Move();
+            Car<CarEngine> ExtraCar = new Car<CarEngine>();
+            HybridCar<GasEngine, ElectricEngine> hybridCar = new HybridCar<GasEngine, ElectricEngine>();
+            ExtraCar.Move();
+            hybridCar.StartBothEngines();
+            hybridCar.FuelType = FuelType.Gas;
+            hybridCar.Move();
+            hybridCar.FuelType = FuelType.Electricity;
+            hybridCar.Move();
+            hybridCar.StopBothEngines();
+            Console.WriteLine(Car<CarEngine>.MinPrice);
+            Console.WriteLine(Car<CarEngine>.MaxPrice);
 
             Console.ReadKey();
         }
