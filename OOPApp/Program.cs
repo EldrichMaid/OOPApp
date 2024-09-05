@@ -745,6 +745,14 @@
         }
     }
 
+    static class StringExtensions
+    {
+        public static char GetLastChar(this string source)
+        {
+            return source[source.Length - 1];
+        }
+    }
+
 
     internal class Program
     {
@@ -838,11 +846,9 @@
             A a = new A();
             B b = new B();
             C c = new C();
-
             a.Display();    // метод класса A
             b.Display();    // метод класса B
             ((A)b).Display();   // метод класса B
-
             c.Display();    // метод класса C
             ((A)c).Display();   // метод класса B
             ((B)c).Display();	// метод класса B
@@ -868,8 +874,11 @@
             Helper.Swap(ref num1, ref num2);
             Console.WriteLine(num1); //58
             Console.WriteLine(num2); //3
-           
-           
+
+            Console.WriteLine("Extention method results");
+            string str = "Hello";
+            Console.WriteLine(str.GetLastChar());
+            Console.WriteLine("Строка".GetLastChar());
 
             Console.ReadKey();
         }
