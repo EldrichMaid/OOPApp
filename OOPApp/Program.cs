@@ -753,6 +753,32 @@
         }
     }
 
+    static class IntExtensions
+    {
+        public static int GetNegative(this int number)
+        {
+            if (number > 0)
+            {
+                return -number;
+            }
+            else
+            {
+                return number;
+            }
+        }
+        public static int GetPositive(this int number)
+        {
+            if (number < 0)
+            {
+                return -number;
+            }
+            else
+            {
+                return number;
+            }
+        }
+    }
+
 
     internal class Program
     {
@@ -875,10 +901,21 @@
             Console.WriteLine(num1); //58
             Console.WriteLine(num2); //3
 
-            Console.WriteLine("Extention method results");
+            Console.WriteLine("Extension method results");
             string str = "Hello";
             Console.WriteLine(str.GetLastChar());
             Console.WriteLine("Строка".GetLastChar());
+            
+            Console.WriteLine("7.5.9 Extension results");
+            int num3 = 7;
+            int num4 = -13;
+            int num5 = 0;            
+            Console.WriteLine(num3.GetNegative()); //-7
+            Console.WriteLine(num3.GetPositive()); //7
+            Console.WriteLine(num4.GetNegative()); //-13
+            Console.WriteLine(num4.GetPositive()); //13
+            Console.WriteLine(num5.GetNegative()); //0
+            Console.WriteLine(num5.GetPositive()); //0
 
             Console.ReadKey();
         }
