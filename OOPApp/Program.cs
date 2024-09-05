@@ -134,6 +134,15 @@
         public int Mileage;
         private string color;
         private TurnDirection turn;
+        public static int MinPrice = 100_000;
+        public static int MaxPrice;
+        public int Price;
+
+        static Car()
+        {
+            Console.WriteLine("Вызван статический конструктор класса Car");
+            MaxPrice = 1_000_000;
+        }
 
         public Car()
         {
@@ -809,7 +818,9 @@
             HybridCar hybridCar = new HybridCar();
             ExtraCar.Move();         
             hybridCar.Move();       
-            ((Car)hybridCar).Move();
+            ((Car)hybridCar).Move(); 
+            Console.WriteLine(Car.MinPrice);
+            Console.WriteLine(Car.MaxPrice);
 
             DerivedClass Object = new DerivedClass("name","description");
             Object.Display();
@@ -847,6 +858,8 @@
             Helper.Swap(ref num1, ref num2);
             Console.WriteLine(num1); //58
             Console.WriteLine(num2); //3
+           
+           
 
             Console.ReadKey();
         }
