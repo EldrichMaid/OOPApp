@@ -716,6 +716,16 @@
         public override void Work() {}
     }
 
+    class Helper 
+    {
+        public static void Swap (ref int x, ref int y) 
+        {
+            int temp = x;
+            x = y;
+            y = temp;
+        }
+    }
+
 
     internal class Program
     {
@@ -831,6 +841,12 @@
             };
             BookCollection collection = new BookCollection(array);
             Book book = collection[1];
+
+            int num1 = 3;
+            int num2 = 58;
+            Helper.Swap(ref num1, ref num2);
+            Console.WriteLine(num1); //58
+            Console.WriteLine(num2); //3
 
             Console.ReadKey();
         }
