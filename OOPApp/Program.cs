@@ -152,6 +152,12 @@
         }
     }
 
+    class Battery { }
+
+    class Differential { }
+
+    class Wheel { }
+
     class GasEngine: CarEngine, IEngine
     {
         public override void Start()
@@ -185,6 +191,11 @@
             Fuel = 50;
             Mileage = 0;
             engine = (T)Activator.CreateInstance(typeof(T));
+        }
+
+        public virtual void ChangePart<T1>(T1 newPart)
+        {
+
         }
 
         public virtual void Move()
