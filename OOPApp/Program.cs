@@ -128,10 +128,10 @@
         Right
     } 
     
-    abstract class CarEngine 
+    class CarEngine 
     {
-        public abstract void Start();
-        public abstract void Stop();
+        public virtual void Start() { }
+        public virtual void Stop() { }
     }
 
     interface IEngine
