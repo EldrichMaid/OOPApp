@@ -411,7 +411,17 @@
     {
         private string name;
         private string description;
-        public static int MaxValue = 2000;
+        public static int MaxValue;
+        public static string Parent;
+        public static int DaysInWeek;
+
+        static Obj() 
+        {
+            MaxValue = 2000;
+            Parent = "System.Object";
+            DaysInWeek = 7;
+
+        }
 
         public Obj()
         {
